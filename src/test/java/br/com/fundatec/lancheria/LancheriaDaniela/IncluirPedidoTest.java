@@ -6,24 +6,30 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import br.com.fundatec.lancheria.repository.PedidoRepository;
 import io.restassured.RestAssured;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IncluirPedidoTest {
 
 	@LocalServerPort
 	private int port;
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	
 	@Before
 	public void setup() {
 		RestAssured.port = port;
 		RestAssured.baseURI = "http://localhost";
+		pedidoRepository.deleteAll();
 	}
 	
 	@Test
@@ -48,6 +54,9 @@ public class IncluirPedidoTest {
 		.body("Entrega", Matchers.equalTo("Local"))
 		.body("id", Matchers.greaterThan(0))
 		.statusCode(HttpStatus.CREATED.value());
+		
+		Assert.assertTrue(pedidoRepository.count() > 0);
+		
 		
 	}
 }
