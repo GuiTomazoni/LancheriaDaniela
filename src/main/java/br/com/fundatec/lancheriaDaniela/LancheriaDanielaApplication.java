@@ -1,4 +1,4 @@
-package br.com.fundatec.lancheria.LancheriaDaniela;
+package br.com.fundatec.lancheriaDaniela;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
