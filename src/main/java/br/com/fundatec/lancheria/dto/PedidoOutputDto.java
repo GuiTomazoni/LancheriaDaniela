@@ -1,55 +1,43 @@
 package br.com.fundatec.lancheria.dto;
 
+import java.util.List;
+
+import br.com.fundatec.lancheria.entity.Cliente;
+import br.com.fundatec.lancheria.entity.Item;
+import br.com.fundatec.lancheria.entity.Comanda;
+
 public class PedidoOutputDto {
 	
 	private Long id;
-	private String lanche;
-	private String bebida;
-	private Double valor;
+	private List<Comanda> itensPedidos;
 	private String entrega;
+	private Cliente cliente;
 	
 	public PedidoOutputDto() {
 		
-	}	
+	}
 
-	public PedidoOutputDto(Long id, String lanche, String bebida, Double valor, String entrega) {
+	public PedidoOutputDto(Long id, List<Comanda> itensPedidos, String entrega, Cliente cliente) {
 		this.id = id;
-		this.lanche = lanche;
-		this.bebida = bebida;
-		this.valor = valor;
+		this.itensPedidos = itensPedidos;
 		this.entrega = entrega;
+		this.cliente = cliente;
 	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
+
 	public Long getId() {
 		return id;
 	}
 
-	public String getLanche() {
-		return lanche;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setLanche(String lanche) {
-		this.lanche = lanche;
+	public List<Comanda> getItens() {
+		return itensPedidos;
 	}
 
-	public String getBebida() {
-		return bebida;
-	}
-
-	public void setBebida(String bebida) {
-		this.bebida = bebida;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setItens(List<Comanda> itensPedidos) {
+		this.itensPedidos = itensPedidos;
 	}
 
 	public String getEntrega() {
@@ -59,6 +47,16 @@ public class PedidoOutputDto {
 	public void setEntrega(String entrega) {
 		this.entrega = entrega;
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}	
+
+	
 	
 	
 }

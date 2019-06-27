@@ -17,13 +17,13 @@ public class Cozinheiro {
 	private String nome;
 	@Min(value = 0)
 	private Integer idade;
-	private List<Pedido> pedidos;
+	//private List<Pedido> pedidos;
 	
 	public Cozinheiro() {
 		
 	}
 
-	public Cozinheiro(Long id, String nome, @Min(0) Integer idade, List<Pedido> pedidos) {
+	public Cozinheiro(Long id, String nome, @Min(0) Integer idade) {
 		this.id = id;
 		this.nome = nome;
 		this.idade = idade;
@@ -52,16 +52,6 @@ public class Cozinheiro {
 	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
-
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-	
-	
 	
 	
 	

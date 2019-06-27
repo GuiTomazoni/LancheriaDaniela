@@ -10,5 +10,5 @@ import br.com.fundatec.lancheria.entity.Pedido;
 @Repository
 public interface PedidoRepository extends CrudRepository<Pedido, Long>{
 
-	List<Pedido> findByNomeContainingIgnoringCase(String nome);
+	//List<Pedido> findByNomeContainingIgnoringCase(String nome);
 }

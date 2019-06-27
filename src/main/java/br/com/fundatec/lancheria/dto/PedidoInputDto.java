@@ -1,41 +1,56 @@
 package br.com.fundatec.lancheria.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PositiveOrZero;
+
+import br.com.fundatec.lancheria.entity.Cliente;
+import br.com.fundatec.lancheria.entity.Item;
+import br.com.fundatec.lancheria.entity.Comanda;
 
 public class PedidoInputDto {
 
-	public String lanche;
-	public String bebida;
-	@PositiveOrZero(message = "O valor deve ser maior ou igual a zero")
-	public Double valor;
+	private List<Comanda> itensPedidos;
 	@NotBlank(message = "O campo Entrega deve ser preenchido")
 	public String entrega;
+	public Cliente cliente;
 	
-	public String getLanche() {
-		return lanche;
+	public PedidoInputDto() {
+		
 	}
-	public void setLanche(String lanche) {
-		this.lanche = lanche;
+	
+	public PedidoInputDto(List<Comanda> itensPedidos, @NotBlank(message = "O campo Entrega deve ser preenchido") String entrega,
+			Cliente cliente) {
+		this.itensPedidos = itensPedidos;
+		this.entrega = entrega;
+		this.cliente = cliente;
 	}
-	public String getBebida() {
-		return bebida;
+	
+	public List<Comanda> getItens() {
+		return itensPedidos;
 	}
-	public void setBebida(String bebida) {
-		this.bebida = bebida;
+	
+	public void setItens(List<Comanda> itensPedidos) {
+		this.itensPedidos = itensPedidos;
 	}
-	public Double getValor() {
-		return valor;
-	}
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+	
 	public String getEntrega() {
 		return entrega;
 	}
+	
 	public void setEntrega(String entrega) {
 		this.entrega = entrega;
 	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	
 	
 	
 }

@@ -12,19 +12,17 @@ public class PedidoMapper {
 	public PedidoOutputDto mapearPedidoOutputDto (Pedido pedido) {
 		return new PedidoOutputDto(
 				pedido.getId(),
-				pedido.getLanche(),
-				pedido.getBebida(),
-				pedido.getValor(),
-				pedido.getOrigemDoPedido()
+				pedido.getComandas(),
+				pedido.getOrigemDoPedido(),
+				pedido.getCliente()
 				);
 	}
 	
 	public Pedido mapearPedido (PedidoInputDto pedidoInputDto) {
 		return new Pedido(null,
-				pedidoInputDto.getLanche(),
-				pedidoInputDto.getBebida(),
-				pedidoInputDto.getValor(),
-				pedidoInputDto.getEntrega()
+				pedidoInputDto.getItens(),
+				pedidoInputDto.getEntrega(),
+				pedidoInputDto.getCliente()
 				);
 	}
 }
