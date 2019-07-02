@@ -18,6 +18,7 @@ import br.com.fundatec.lancheria.entity.Cliente;
 import br.com.fundatec.lancheria.entity.Item;
 import br.com.fundatec.lancheria.entity.Pedido;
 import br.com.fundatec.lancheria.repository.ClienteRepository;
+import br.com.fundatec.lancheria.repository.ComandaRepository;
 import br.com.fundatec.lancheria.repository.ItemRepository;
 import br.com.fundatec.lancheria.repository.PedidoRepository;
 import io.restassured.RestAssured;
@@ -34,6 +35,8 @@ public class IncluirPedidoTest {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private ItemRepository itemRepository;
+	@Autowired
+	private ComandaRepository comandaRepository;
 	private Cliente cliente;
 	private Item CocaCola;
 	private Item Heineken;
@@ -44,8 +47,10 @@ public class IncluirPedidoTest {
 	public void setup() {
 		RestAssured.port = port;
 		RestAssured.baseURI = "http://localhost";
+		comandaRepository.deleteAll();
 		pedidoRepository.deleteAll();
-		cliente = clienteRepository.save(new Cliente(null, "Guilherme", "51981932166", "Fundatec"));
+		itemRepository.deleteAll();
+		clienteRepository.deleteAll();
 		cliente = clienteRepository.save(new Cliente(null, "Guilherme", "51981932166", "Fundatec"));
 		CocaCola = itemRepository.save(new Item("Coca-cola", new Double(4.50)));
 		Heineken = itemRepository.save(new Item("Heineken", new Double(12.00)));
@@ -61,15 +66,15 @@ public class IncluirPedidoTest {
 		.header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
 		.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 		.body("{"+ 
-				"	\"Itens\": [{" + 
-				"		\"id\": " + CocaCola.getId() + 
+				"	\"itensPedidos\": [{" + 
+				"		\"id\": " + CocaCola.getId() + "," + 
 				"		\"quantidade\": 2" + 
 				"	}, {" + 
-				"		\"id\":" + Xis.getId() + 
+				"		\"id\":" + Xis.getId() + ","+ 
 				"		\"quantidade\": 6" + 
 				"	}]," + 
-				"	\"Entrega\": \"Local\"," + 
-				"	\"Cliente\": " + cliente.getNome() + 
+				"	\"entrega\": \"Local\"," + 
+				"	\"cliente\": \"" + cliente.getNome() + "\" " +
 				"}")
 		.when()
 		.post("/v1/pedidos")
@@ -81,16 +86,13 @@ public class IncluirPedidoTest {
 		Assert.assertTrue(pedidoRepository.count() > 0);
 		Assert.assertTrue(pedidoOutputDto.getId() > 0);
 		
-		Assert.assertEquals("Coca-cola", pedidoOutputDto.getItens().get(1).getItem().getNome());
-		Assert.assertEquals(2, pedidoOutputDto.getItens().get(1).getQuantidade().intValue());
+		Assert.assertEquals(CocaCola.getId(), pedidoOutputDto.getItens().get(0).getId());
+		Assert.assertEquals(2, pedidoOutputDto.getItens().get(0).getQuantidade().intValue());
 		
-		Assert.assertEquals("Xis-Carne", pedidoOutputDto.getItens().get(2).getItem().getNome());
-		Assert.assertEquals(6, pedidoOutputDto.getItens().get(2).getQuantidade().intValue());
+		Assert.assertEquals(Xis.getId(), pedidoOutputDto.getItens().get(1).getId());
+		Assert.assertEquals(6, pedidoOutputDto.getItens().get(1).getQuantidade().intValue());
 		
 		Assert.assertEquals("Local", pedidoOutputDto.getEntrega());
-		
-		
-		
 		
 	}
 }

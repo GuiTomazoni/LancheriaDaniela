@@ -31,8 +31,9 @@ public class LancheriaController {
 	@PostMapping("/v1/pedidos")
 	public ResponseEntity<?> incluirPedido(@Valid @RequestBody PedidoInputDto pedidoInputDto){
 		Pedido pedido = pedidoMapper.mapearPedido(pedidoInputDto);
-		pedido = pedidoService.salvar(pedido);
+		pedido = pedidoService.salvar(pedido, pedido.getItensPedidos());
 		PedidoOutputDto pedidoOutputDto = pedidoMapper.mapearPedidoOutputDto(pedido);
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(pedidoOutputDto);
 	}
 }

@@ -24,6 +24,15 @@ public class Comanda {
 	public Comanda() {
 
 	}
+	
+	
+
+	public Comanda(Integer quantidadeDeItens, Item item) {
+		this.quantidadeDeItens = quantidadeDeItens;
+		this.item = item;
+	}
+
+
 
 	public Comanda(Pedido pedido, Integer quantidade, Item item) {
 		this.pedido = pedido;

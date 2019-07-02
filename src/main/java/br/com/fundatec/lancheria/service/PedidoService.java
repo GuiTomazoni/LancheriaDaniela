@@ -25,11 +25,13 @@ public class PedidoService {
 		return null; //pedidoRepository.findByNomeContainingIgnoringCase(nome);
 	}
 	
-	public Pedido salvar(Pedido pedido) {
+	public Pedido salvar(Pedido pedido, List<Comanda> itensPedidos) {
 		pedido = pedidoRepository.save(pedido);
-		for(Comanda comanda : pedido.getComandas()) {
+		for(Comanda comanda : itensPedidos) {
+			comanda.setPedido(pedido);
 			comandaService.salvar(comanda);
 		}
+		pedido.setItensPedidos(comandaService.buscarPorPedido(pedido));
 		return pedido;
 	}
 }

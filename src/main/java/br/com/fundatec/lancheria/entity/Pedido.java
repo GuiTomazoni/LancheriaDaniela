@@ -17,7 +17,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToMany(mappedBy = "item")
-	private List<Comanda> comandas;
+	private List<Comanda> itensPedidos;
 	private String origemDoPedido;
 	@ManyToOne
 	@JoinColumn(name = "idCliente")
@@ -26,10 +26,10 @@ public class Pedido {
 	public Pedido() {
 
 	}
-
+	
 	public Pedido(Long id, List<Comanda> itensPedidos, String origemDoPedido, Cliente cliente) {
 		this.id = id;
-		this.comandas = itensPedidos;
+		this.itensPedidos = itensPedidos;
 		this.origemDoPedido = origemDoPedido;
 		this.cliente = cliente;
 	}
@@ -42,12 +42,12 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public List<Comanda> getComandas() {
-		return comandas;
+	public List<Comanda> getItensPedidos() {
+		return itensPedidos;
 	}
 
-	public void setComandas(List<Comanda> comandas) {
-		this.comandas = comandas;
+	public void setItensPedidos(List<Comanda> itensPedidos) {
+		this.itensPedidos = itensPedidos;
 	}
 
 	public String getOrigemDoPedido() {
@@ -65,5 +65,7 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	
 
 }

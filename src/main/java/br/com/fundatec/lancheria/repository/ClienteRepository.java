@@ -6,4 +6,5 @@ import br.com.fundatec.lancheria.entity.Cliente;
 
 public interface ClienteRepository extends CrudRepository<Cliente, Long>{
 
+	Cliente findByNomeIgnoringCase(String nome);
 }

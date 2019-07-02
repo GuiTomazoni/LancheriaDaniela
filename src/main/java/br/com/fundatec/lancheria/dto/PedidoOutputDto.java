@@ -9,15 +9,15 @@ import br.com.fundatec.lancheria.entity.Comanda;
 public class PedidoOutputDto {
 	
 	private Long id;
-	private List<Comanda> itensPedidos;
+	private List<ItemPedidoDto> itensPedidos;
 	private String entrega;
-	private Cliente cliente;
+	private String cliente;
 	
 	public PedidoOutputDto() {
 		
 	}
 
-	public PedidoOutputDto(Long id, List<Comanda> itensPedidos, String entrega, Cliente cliente) {
+	public PedidoOutputDto(Long id, List<ItemPedidoDto> itensPedidos, String entrega, String cliente) {
 		this.id = id;
 		this.itensPedidos = itensPedidos;
 		this.entrega = entrega;
@@ -32,11 +32,11 @@ public class PedidoOutputDto {
 		this.id = id;
 	}
 
-	public List<Comanda> getItens() {
+	public List<ItemPedidoDto> getItens() {
 		return itensPedidos;
 	}
 
-	public void setItens(List<Comanda> itensPedidos) {
+	public void setItens(List<ItemPedidoDto> itensPedidos) {
 		this.itensPedidos = itensPedidos;
 	}
 
@@ -48,13 +48,13 @@ public class PedidoOutputDto {
 		this.entrega = entrega;
 	}
 
-	public Cliente getCliente() {
+	public String getCliente() {
 		return cliente;
 	}
-
-	public void setCliente(Cliente cliente) {
+	
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
-	}	
+	}
 
 	
 	
