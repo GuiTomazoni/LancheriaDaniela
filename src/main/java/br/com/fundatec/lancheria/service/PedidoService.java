@@ -20,10 +20,6 @@ public class PedidoService {
 		this.pedidoRepository = pedidoRepository;
 		this.comandaService = comandaService;
 	}
-
-	public List<Pedido> listarPedidosPorNomeDeCliente(String nome){
-		return null; //pedidoRepository.findByNomeContainingIgnoringCase(nome);
-	}
 	
 	public Pedido salvar(Pedido pedido, List<Comanda> itensPedidos) {
 		pedido = pedidoRepository.save(pedido);
@@ -33,5 +29,9 @@ public class PedidoService {
 		}
 		pedido.setItensPedidos(comandaService.buscarPorPedido(pedido));
 		return pedido;
+	}
+
+	public List<Pedido> listarPedidos() {
+		return (List<Pedido>) pedidoRepository.findAll();
 	}
 }
